@@ -1,0 +1,33 @@
+{
+  "title": "demo-are",
+  "name": "startbootstrap-bare",
+  "version": "4.1.4",
+  "description": "A basic HTML starter template for Bootstrap",
+  "keywords": [
+    "css",
+    "sass",
+    "html",
+    "responsive",
+    "theme",
+    "template"
+  ],
+  "homepage": "https://startbootstrap.com/template-overviews/bare",
+  "license": "MIT",
+  "author": "Start Bootstrap",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/BlackrockDigital/startbootstrap-bare.git"
+  },
+  "dependencies": {
+    "bootstrap": "4.2.1",
+    "jquery": "3.3.1"
+  },
+  "devDependencies": {
+    "browser-sync": "2.26.3",
+    "gulp": "4.0.0"
+  },
+  "main": "gulpfile.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  }
+}
