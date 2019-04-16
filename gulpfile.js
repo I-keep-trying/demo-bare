@@ -1,51 +1,24 @@
-// Load plugins
-const browsersync = require('browser-sync').create()
-const gulp = require('gulp')
+var gulp = require('gulp')
+var browserSync = require('browser-sync').create()
+var sass = require('gulp-sass')
 
-// Copy third party libraries from /node_modules into /vendor
-gulp.task('vendor', function(cb) {
-  // Bootstrap
-  gulp
-    .src([
-      './node_modules/bootstrap/dist/**/*',
-      '!./node_modules/bootstrap/dist/css/bootstrap-grid*',
-      '!./node_modules/bootstrap/dist/css/bootstrap-reboot*',
-    ])
-    .pipe(gulp.dest('./vendor/bootstrap'))
+// Static Server + watching scss/html files
+gulp.task('serve', ['sass'], function() {
+  browserSync.init({
+    server: './app',
+  })
 
-  // jQuery
-  gulp
-    .src([
-      './node_modules/jquery/dist/*',
-      '!./node_modules/jquery/dist/core.js',
-    ])
-    .pipe(gulp.dest('./vendor/jquery'))
-
-  cb()
+  gulp.watch('app/scss/*.scss', ['sass'])
+  gulp.watch('app/*.html').on('change', browserSync.reload)
 })
 
-// BrowserSync
-function browserSync(done) {
-  browsersync.init({
-    server: {
-      baseDir: './',
-    },
-  })
-  done()
-}
+// Compile sass into CSS & auto-inject into browsers
+gulp.task('sass', function() {
+  return gulp
+    .src('app/scss/*.scss')
+    .pipe(sass())
+    .pipe(gulp.dest('app/css'))
+    .pipe(browserSync.stream())
+})
 
-// BrowserSync Reload
-function browserSyncReload(done) {
-  browsersync.reload()
-  done()
-}
-
-// Watch files
-function watchFiles() {
-  gulp.watch('./**/*.html', browserSyncReload)
-}
-
-gulp.task('default', gulp.parallel('vendor'))
-
-// dev task
-gulp.task('dev', gulp.parallel(watchFiles, browserSync))
+gulp.task('default', ['serve'])

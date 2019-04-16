@@ -1,0 +1,16 @@
+@import "../node_modules/bootstrap/scss/functions";
+@import "../node_modules/bootstrap/scss/variables";
+
+$enable-gradients: true;
+$enable-responsive-font-sizes: true;
+$enable-shadows: true;
+
+html,h1,h2,h3,h4,h5,h6,a{
+    font-family: "Segoe UI";
+   }
+
+.test {
+    color: pink;
+}
+
+@import "../node_modules/bootstrap/scss/bootstrap";
