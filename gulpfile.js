@@ -6,11 +6,20 @@ const gulp = require('gulp')
 gulp.task('vendor', function(cb) {
   // Bootstrap
   gulp
-    .src(['./node_modules/bootstrap/dist/**/*'])
+    .src([
+      './node_modules/bootstrap/dist/**/*',
+      '!./node_modules/bootstrap/dist/css/bootstrap-grid*',
+      '!./node_modules/bootstrap/dist/css/bootstrap-reboot*',
+    ])
     .pipe(gulp.dest('./vendor/bootstrap'))
 
   // jQuery
-  gulp.src(['./node_modules/jquery/dist/*']).pipe(gulp.dest('./vendor/jquery'))
+  gulp
+    .src([
+      './node_modules/jquery/dist/*',
+      '!./node_modules/jquery/dist/core.js',
+    ])
+    .pipe(gulp.dest('./vendor/jquery'))
 
   cb()
 })
